@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.greejoy.dlssjk.repository.AreaRepository">
+	<select id="getAreas" resultType="HashMap" >
+		select
+		 area_id as id,point_id,
+		 monitor_id,area_name as name,
+		 area_normolTemp as normal_temp,
+		 area_seriousTemp as serious_temp,
+		 area_criticalTemp as critical_temp,
+		 area_description as description 
+	   from area_table where area_name &lt;&gt;"" ${filter};
+	</select>
+	<select id="getAreasBriefInfo" resultType="HashMap" >
+		select
+		 area_id as id,
+		 area_name as name
+	   from area_table  where area_name &lt;&gt;"" 
+	   ${filter};
+	</select>
+	<select id="getArea" resultType="HashMap" >
+		select
+		 area_id as id,point_id,
+		 monitor_id,area_name as name,
+		 area_normolTemp as normal_temp,
+		 area_seriousTemp as serious_temp,
+		 area_criticalTemp as critical_temp,
+		 area_description as description 
+	   from area_table where area_id=#{areaId};
+	</select>
+</mapper>

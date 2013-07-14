@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.greejoy.dlssjk.repository.TaskPointLogRepository">
+	<select id="getTaskPointLogs" resultType="HashMap">
+		select 
+			a.taskpointlog_id as id,
+			a.tasklog_id,
+			c.task_name,
+			a.point_id,
+			a.taskpointlog_time as time,
+			a.taskpointlog_minTemp as min_temp,
+			a.taskpointlog_maxTemp  as max_temp,
+			a.taskpointlog_alarmFlag as alarm_flag,
+			a.taskpointlog_snapName as snap_name
+		from taskpointlog_table a 
+		inner join tasklog_table b on a.tasklog_id = b.tasklog_id  
+		inner join task_table c on b.task_id= c.task_id
+		${filter}
+	</select>
+	<select id="getTaskPointLog" resultType="HashMap">
+		select 
+			a.taskpointlog_id as id,
+			a.tasklog_id,
+			c.task_name,
+			a.point_id,
+			a.taskpointlog_time as time,
+			a.taskpointlog_minTemp as min_temp,
+			a.taskpointlog_maxTemp  as max_temp,
+			a.taskpointlog_alarmFlag as alarm_flag,
+			a.taskpointlog_snapName as snap_name
+		from taskpointlog_table a 
+		inner join tasklog_table b on a.tasklog_id = b.tasklog_id  
+		inner join task_table c on b.task_id= c.task_id
+		where a.taskpointlog_id = #{id}
+	</select>
+</mapper>

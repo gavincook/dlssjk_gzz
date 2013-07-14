@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.greejoy.dlssjk.repository.PointRepository">
+	<select id="getPoints" resultType="HashMap">
+		select point_id as id,monitor_id,point_name as name,point_ambTemp as amb_temp,point_distance as distance,point_number  from point_table ${filter};
+	</select>
+	<select id="getPointsBriefInfo" resultType="HashMap">
+		select point_id as id,point_name as name from point_table ${filter};
+	</select>
+	<select id="getPoint" resultType="HashMap">
+		select point_id as id,monitor_id,point_name as name,point_ambTemp as amb_temp,point_distance as distance,point_number  from point_table where point_id=#{pointId};
+	</select>
+</mapper>

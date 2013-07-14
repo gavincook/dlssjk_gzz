@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+
+/**********全局css***************/
+body{
+	background-color: white;
+	margin: 0px;
+}
+
+.headbar{
+	height:27px;
+	font-size: 14px;
+}
+
+.headbar .bartitle{
+	margin-top:5px;
+	float:left;
+	margin-left: 5px;
+}
+
+.headbar .btns span{
+	float: right;
+	font-weight: normal;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	padding:5px 5px 0px 5px;
+	margin-right: 5px;
+	color: black;
+}
+
+.headbar .btns span a{
+	color: black;
+}
+
+.headbar .btns span:HOVER{
+	height:22px;
+	padding:5px 5px 0px 5px;
+	cursor: pointer;
+	background-color:  #a7c3e8;
+}
+
+.hide{
+	display: none;
+}
+
+.dialogForm label{
+	width:100px;
+	float: left;
+}
+
+.dialogForm input{
+	width:200px;
+}
+
+.dialogForm div{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.dialogForm textarea{
+	width:200px;
+	height: 50px;
+}
+/**********全局css***************/
+
+
+/*******工作站********/
+.station{
+	width:30%;
+	padding:8px 8px 8px 8px;
+	height:120px;
+	min-width: 420px;
+	float:left;
+	margin: 10px 5px 15px 5px;
+	box-shadow:5px 5px 20px black;
+	background-color: white;
+	cursor: pointer;
+}
+
+.station img{
+	width:200px;
+	height:120px;
+	float: left;
+	margin-right: 10px;
+}
+
+.station .title{
+	font-size:18px;
+	font-weight: bold;
+	color: rgb(55, 134, 235);
+	margin-bottom: 15px;
+}
+
+.station .stationDetail{
+	text-align: center;
+}
+
+.station .content{
+	font-size:14px;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+.stationDetails .content{
+	float:left;
+	text-align: center;	
+}
+
+.stationDetails .content .title{
+	font-size:18px;
+	font-weight: bold;
+	color: rgb(55, 134, 235);
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+.stationDetails .logo {
+	width: 400px;
+	height: 200px;
+	float: left;
+	margin-right: 50px;
+}
+
+.stationDetails .content span {
+	float:left;
+	text-align:right;
+	display:block;
+	width: 100px;
+	color: rgb(97, 148, 240);
+	margin-right: 20px;
+}
+.stationDetails .content div {
+	margin: 20px 0 20px 0;
+	text-align: left;
+}
+/*******工作站********/

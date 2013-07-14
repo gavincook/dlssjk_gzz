@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.greejoy.dlssjk.repository.TaskLogRepository">
+	<select id="getTaskLogs" resultType="HashMap">
+		select 
+			a.tasklog_id as id,
+			a.tasklog_time as time,
+			a.tasklog_state as status,
+			a.monitor_id,
+			a.task_id,
+			b.task_name
+		from tasklog_table a 
+		inner join task_table b on a.task_id=b.task_id ${filter};
+	</select>
+	<select id="getTaskLog" resultType="HashMap">
+		select 
+			a.tasklog_id as id,
+			a.tasklog_time as time,
+			a.tasklog_state as status,
+			a.monitor_id,
+			a.task_id,
+			b.task_name
+		from tasklog_table a
+		inner join task_table b on a.task_id=b.task_id
+		where a.tasklog_id=#{id};
+	</select>
+	
+</mapper>

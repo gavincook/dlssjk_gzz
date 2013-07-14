@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.greejoy.dlssjk.repository.TaskAreaLogRepository">
+	<select id="getTaskAreaLogs" resultType="HashMap">
+		SELECT 
+			taskarealog_id AS id,
+			taskpointlogtable.taskpointlog_id,
+			taskarealog_type AS record_type,
+			taskarealog_minTemp AS min_temp,
+			taskarealog_maxTemp AS max_temp,
+			taskarealog_alarmTemp AS alarm_temp,
+			taskarealog_time AS time,
+			taskarealog.area_id AS area_id,
+			areatable.point_id  AS point_id ,
+			alarmtable.alarm_id,
+			taskpointlogtable.taskpointlog_minTemp
+			${columns}
+		FROM taskarealog_table taskarealog 
+		JOIN area_table areatable 
+		ON   taskarealog.area_id = areatable.area_id and areatable.area_name &lt;&gt;""
+		JOIN point_table pointtable ON areatable.point_id = pointtable.point_id
+		JOIN monitor_table monitortable ON pointtable.monitor_id = monitortable.monitor_id
+		LEFT JOIN alarm_table alarmtable ON alarmtable.alarm_time=taskarealog.taskarealog_time 
+		AND taskarealog.area_id=alarmtable.area_id
+		JOIN taskpointlog_table taskpointlogtable ON taskpointlogtable.taskpointlog_id=taskarealog.taskpointlog_id
+		${filter};
+	</select>
+	
+	<select id="getTaskAreaLogsCounts" resultType="Long">
+		SELECT 
+			count(*) as total
+		FROM taskarealog_table  taskarealog
+		${filter};
+	</select>
+	
+	<select id="getTaskAreaLogsDateByHour" resultType="HashMap">
+		SELECT DATE_FORMAT(taskarealog_time,'%Y-%m-%d (%H时)') AS logdate
+		FROM taskarealog_table ${filter} 
+		GROUP BY DATE(taskarealog_time),HOUR(taskarealog_time) ORDER BY taskarealog_time DESC;
+	</select>
+	
+	<select id="getTaskAreaLogsDateByDay" resultType="HashMap">
+		SELECT DATE_FORMAT(taskarealog_time,'%Y-%m-%d') AS logdate 
+		FROM taskarealog_table  ${filter} 
+		GROUP BY DATE(taskarealog_time)
+		ORDER BY taskarealog_time DESC;
+	</select>
+	
+	<select id="getTaskAreaLogsDateByMonth" resultType="HashMap">
+		SELECT DATE_FORMAT(taskarealog_time,'%Y-%m') AS logdate 
+		FROM taskarealog_table  ${filter} 
+		GROUP BY YEAR(taskarealog_time),MONTH(taskarealog_time)
+		ORDER BY taskarealog_time DESC;
+	</select>
+	
+	<select id="getTaskAreaLog" resultType="HashMap">
+		select 
+			taskarealog_id as id,
+			taskpointlog_id,
+			taskarealog_type as record_type,
+			taskarealog_minTemp as min_temp,
+			taskarealog_maxTemp as max_temp,
+			taskarealog_alarmTemp as alarm_temp,
+			taskarealog_time as time,
+			area_id 
+		from taskarealog_table where taskarealog_id =  #{id};
+	</select>
+</mapper>

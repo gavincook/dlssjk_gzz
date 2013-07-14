@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.greejoy.dlssjk.repository.AlarmRepository">
+	<select id="getAlarmRecords" resultType="HashMap">
+	  SELECT alarm_id AS id,
+	       date_format(alarm_time,'%Y-%m-%d %H:%i:%s') AS alarm_time,
+	       alarm_temp,
+	       alarm_type,
+	       alarm_realTemp,
+	       area_name,
+	       point_name,
+	       monitor_name,
+	       alarm_snapFilePath as snapPath
+       FROM alarm_table alarmtable
+       LEFT JOIN area_table areatable ON areatable.area_id=alarmtable.area_id
+       LEFT JOIN point_table pointtable ON pointtable.point_id=alarmtable.point_id
+       LEFT JOIN monitor_table monitortable ON monitortable.monitor_id=alarmtable.monitor_id
+		${filter};
+	</select>
+	
+	<select id="getAlarmRecordsCounts" resultType="Long">
+		SELECT count(*) as total
+        FROM alarm_table 
+        ${filter}
+	</select>
+	
+	<select id="getAlarmRecord" resultType="HashMap">
+	  SELECT alarm_id AS id,
+	       date_format(alarm_time,'%Y-%m-%d %H:%i:%s') AS alarm_time,
+	       alarm_temp,
+	       alarm_type,
+	       alarm_realTemp,
+	       alarm_snapFilePath as snapPath
+       FROM alarm_table alarmtable
+		where alarm_id = #{alarmId}
+	</select>
+</mapper>
